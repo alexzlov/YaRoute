@@ -6,3 +6,23 @@
   height: 400px;
   margin-left: 20%;
 }
+
+.delete-btn {
+  float: right;
+  margin-right: 5%;
+  margin-left: auto;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 10px;
+}
+
+.list-item .on-drop {
+  border-radius: 5px;
+  padding: 5px 5px 5px 5px;
+}
+
+.on-drop {
+  background: #ccc;
+}
