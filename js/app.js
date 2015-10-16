@@ -88,11 +88,12 @@ angular.module('yaRoute', [])
        * берутся из конфига приложения
        */
       this.addRoutePoint = function() {
+        self.pointCounter += 1;
         if (!self.routePointName.length) {
           return;
         }
         var newPoint = {
-          id: self.pointCounter + 1,
+          id: self.pointCounter,
           name: self.routePointName
         };
         var newMapPoint = new self.ymaps.Placemark(
