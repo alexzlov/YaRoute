@@ -225,6 +225,7 @@ angular.module('yaRoute', [])
           var to = this.getAttribute("data-id");
           var from = event.dataTransfer.getData("Attributes");
           scope.drop({from: from, to: to});
+          this.classList.remove('on-drop');
           return false;
         }, false);
       }
