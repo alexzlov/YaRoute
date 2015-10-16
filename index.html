@@ -22,7 +22,7 @@
           <li class="list-item"
               ng-repeat="item in yrc.routePoints track by $index"
               data-id="{{ item.id }}"
-              draggable droppable drop="yrc.handleDrop(from, to)">{{ item.name }}
+              draggable droppable drop="yrc.drop(from, to)">{{ item.name }}
             <button class="delete-btn" ng-click="yrc.deleteRoutePoint(item.id)">x</button>
           </li>
         </ul>

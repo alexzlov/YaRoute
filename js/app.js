@@ -156,8 +156,13 @@ angular.module('yaRoute', [])
         }
       };
 
-      this.dragItem = function(item) {
-        console.log(item.name);
+      /**
+       * Меняет местами элементы списка при перетаскивании
+       * @param from
+       * @param to
+       */
+      this.drop = function(from, to) {
+        console.log(from + ' <--> ' + to);
       };
   }])
   .directive('draggable', function() {
@@ -200,10 +205,8 @@ angular.module('yaRoute', [])
             event.stopPropagation();
           }
           var to = this.getAttribute("data-id");
-          var from = document.querySelector(
-            '[data-id="' + event.dataTransfer.getData("Attributes") + '"]'
-          );
-          scope.$apply('yrc.drop(' + from + ',' + to + ')');
+          var from = event.dataTransfer.getData("Attributes");
+          scope.drop({from: from, to: to});
           return false;
         }, false);
       }
