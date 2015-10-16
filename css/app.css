@@ -18,9 +18,9 @@ ul {
   padding-left: 10px;
 }
 
-.list-item .on-drop {
+.list-item {
   border-radius: 5px;
-  padding: 5px 5px 5px 5px;
+  padding: 0px 5px 5px 5px;
 }
 
 .on-drop {
