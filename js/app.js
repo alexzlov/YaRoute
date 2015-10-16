@@ -64,8 +64,10 @@ angular.module('yaRoute', [])
   .controller('YRouteController', ['$scope', '$element', '$window', 'maps', 'config',
     function($scope, $element, $window, maps, config) {
       "use strict";
-      this.routePoints = [];
       var self = this;
+      self.routePoints = [];
+
+      // Инициализация
       maps.ready(function(ymaps) {
         self.ymap = tmap = new ymaps.Map("map", {
           center: config.mapCenter,
@@ -93,17 +95,26 @@ angular.module('yaRoute', [])
         };
         var newMapPoint = new self.ymaps.Placemark(
           config.mapCenter,
-          {},
+          {
+            balloonContent: newPoint.name
+          },
           {
             draggable: true,
             itemId: newPoint.id
           }
         );
+        newMapPoint.events.add('dragend', function(e) {
+          self.drawRoute();
+        });
+        newMapPoint.events.add('drag', function(e) {
+          self.drawRoute();
+        });
         self.mapPoints.add(newMapPoint);
         newPoint.marker = newMapPoint;
         self.routePoints.push(newPoint);
         // Очищаем текстовое поле
         self.routePointName = "";
+        self.drawRoute();
       };
 
       /**
@@ -118,6 +129,27 @@ angular.module('yaRoute', [])
             self.routePoints.splice(i, 1);
           }
         }
+        self.drawRoute();
+      };
+
+      /**
+       * Отрисовка маршрута при добавлении новой точки
+       * либо при изменении координат существующей
+       */
+      this.drawRoute = function() {
+        var routeGeometry = [];
+        self.routePoints.forEach(function(point) {
+          routeGeometry.push(point.marker.geometry.getCoordinates());
+        });
+        if (self.route) {
+          self.mapPoints.remove(self.route);
+        }
+        self.route = new self.ymaps.Polyline(routeGeometry, {}, {
+          draggable: false,
+          strokeColor: "#FF0000",
+          strokeWidth: 5
+        });
+        self.mapPoints.add(self.route);
       };
 
       this.dragItem = function(item) {
