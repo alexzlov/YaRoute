@@ -7,7 +7,8 @@ angular.module('yaRoute', [])
    */
   .constant('config', {
     scriptUrl: 'https://api-maps.yandex.ru/2.0/?load=package.standard,package.geoObjects,package.editor&lang=ru-RU',
-    mapCenter: [55.72, 37.64]
+    mapCenter: [55.72, 37.64],
+    strokeColor: "#FF0000"
   })
 
   /**
@@ -66,6 +67,7 @@ angular.module('yaRoute', [])
       "use strict";
       var self = this;
       self.routePoints = [];
+      self.pointCounter = 0;
 
       // Инициализация
       maps.ready(function(ymaps) {
@@ -90,7 +92,7 @@ angular.module('yaRoute', [])
           return;
         }
         var newPoint = {
-          id: self.routePoints.length,
+          id: self.pointCounter + 1,
           name: self.routePointName
         };
         var newMapPoint = new self.ymaps.Placemark(
@@ -141,15 +143,16 @@ angular.module('yaRoute', [])
         self.routePoints.forEach(function(point) {
           routeGeometry.push(point.marker.geometry.getCoordinates());
         });
-        if (self.route) {
-          self.mapPoints.remove(self.route);
+        if (!self.route) {
+          self.route = new self.ymaps.Polyline(routeGeometry, {}, {
+            draggable: false,
+            strokeColor: config.strokeColor,
+            strokeWidth: 5
+          });
+          self.mapPoints.add(self.route);
+        } else {
+          self.route.geometry.setCoordinates(routeGeometry);
         }
-        self.route = new self.ymaps.Polyline(routeGeometry, {}, {
-          draggable: false,
-          strokeColor: "#FF0000",
-          strokeWidth: 5
-        });
-        self.mapPoints.add(self.route);
       };
 
       this.dragItem = function(item) {
