@@ -162,7 +162,25 @@ angular.module('yaRoute', [])
        * @param to
        */
       this.drop = function(from, to) {
-        console.log(from + ' <--> ' + to);
+        var fromPointIndex, toPointIndex;
+        for (var i = 0; i < self.routePoints.length; i++) {
+          var item = self.routePoints[i];
+          if (item.id == from) {
+            fromPointIndex = i;
+          }
+          if (item.id == to) {
+            toPointIndex = i;
+          }
+          if (typeof fromPointIndex !== "undefined" && typeof toPointIndex !== "undefined") {
+            self.routePoints[toPointIndex] = [
+              self.routePoints[fromPointIndex],
+              self.routePoints[fromPointIndex] = self.routePoints[toPointIndex]
+            ][0];
+            $scope.$digest();
+            self.drawRoute();
+            break;
+          }
+        }
       };
   }])
   .directive('draggable', function() {
