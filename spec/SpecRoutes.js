@@ -69,4 +69,47 @@ describe('Тесты для YaRoutes', function() {
       expect(ctrl.routePoints[1].id).toEqual(17);
     });
   });
+
+  describe('Тестируем сервисы', function() {
+    var maps;
+    beforeEach(function() {
+      inject(function(_maps_) {
+        maps = _maps_;
+      });
+    });
+
+    describe('Тестируем сервис "maps"', function() {
+      it('Сервис "maps" доступен', function() {
+        expect(angular.isObject(maps)).toBe(true);
+      });
+
+      it('Сервис "maps" возвращает колбэк', function() {
+        expect(angular.isFunction(maps.ready)).toBe(true);
+      });
+    });
+
+    describe('Тестируем загрузчик скрипта Яндекс.Карты', function() {
+      var httpBackend, scriptLoader;
+      beforeEach(function() {
+        inject(function($httpBackend, _scriptLoader_, _config_) {
+          scriptLoader = _scriptLoader_;
+          httpBackend = $httpBackend;
+          config = _config_;
+        });
+      });
+      afterEach(function() {
+        httpBackend.verifyNoOutstandingExpectation();
+        httpBackend.verifyNoOutstandingRequest();
+      });
+
+      it('Загрузчик скрипта доступен', function() {
+        expect(angular.isFunction(scriptLoader)).toBe(true);
+      });
+
+      it('Загрузчик возвращает promise', function() {
+        console.log(scriptLoader(config.scriptUrl));
+        expect(scriptLoader(config.scriptUrl.then)).not.toEqual(undefined);
+      });
+    });
+  });
 });
