@@ -8,8 +8,13 @@ describe('Тесты для YaRoutes', function() {
   describe('Тестируем контроллер', function() {
     var $scope, controller, ctrl;
 
+    /**
+     * Инициализируем и создаем необходимые моки
+     */
     beforeEach(inject(function() {
-      $scope = {};
+      $scope = {
+        $digest: function() {}
+      };
       controller = $controller("YRouteController as yrc", {$scope: $scope});
       ctrl = $scope.yrc;
       ctrl.ymaps = {
@@ -53,6 +58,15 @@ describe('Тесты для YaRoutes', function() {
       }];
       ctrl.deleteRoutePoint(112233);
       expect(ctrl.routePoints.length).toEqual(0);
+    });
+
+    it("Проверка обработчика события drag'n'drop", function() {
+      ctrl.routePoints = [
+        {id: 17}, {id: 17234}
+      ];
+      ctrl.drop(17234, 17);
+      expect(ctrl.routePoints[0].id).toEqual(17234);
+      expect(ctrl.routePoints[1].id).toEqual(17);
     });
   });
 });
