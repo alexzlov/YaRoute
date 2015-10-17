@@ -88,10 +88,10 @@ angular.module('yaRoute', [])
        * берутся из конфига приложения
        */
       this.addRoutePoint = function() {
-        self.pointCounter += 1;
         if (!self.routePointName.length) {
           return;
         }
+        self.pointCounter += 1;
         var newPoint = {
           id: self.pointCounter,
           name: self.routePointName

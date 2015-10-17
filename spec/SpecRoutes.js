@@ -12,6 +12,21 @@ describe('Тесты для YaRoutes', function() {
       $scope = {};
       controller = $controller("YRouteController as yrc", {$scope: $scope});
       ctrl = $scope.yrc;
+      ctrl.ymaps = {
+        Placemark: function() { return {
+          events: {
+            add: function() {}
+          }
+        }
+      }};
+      ctrl.ymap  = {
+        getCenter: function() {}
+      };
+      ctrl.mapPoints = {
+        add: function() {},
+        remove: function() {}
+      };
+      spyOn(ctrl, "drawRoute");
     }));
 
     it('Контроллер доступен', function() {
@@ -26,7 +41,18 @@ describe('Тесты для YaRoutes', function() {
     });
 
     it('Проверка добавления точки маршрута', function() {
+      ctrl.routePointName = "Test Route";
+      var prevRoutePointLength = ctrl.routePoints.length;
+      ctrl.addRoutePoint();
+      expect(ctrl.routePoints.length).toEqual(prevRoutePointLength + 1);
+    });
 
-    })
+    it('Проверка удаления точки маршрута', function() {
+      ctrl.routePoints = [{
+        id: 112233
+      }];
+      ctrl.deleteRoutePoint(112233);
+      expect(ctrl.routePoints.length).toEqual(0);
+    });
   });
 });
