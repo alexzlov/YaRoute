@@ -1,8 +1,8 @@
 {
-  "name": "angular",
+  "name": "angular-mocks",
   "version": "1.4.7",
-  "description": "HTML enhanced for web apps",
-  "main": "index.js",
+  "description": "AngularJS mocks for testing",
+  "main": "angular-mocks.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -14,6 +14,8 @@
     "angular",
     "framework",
     "browser",
+    "mocks",
+    "testing",
     "client-side"
   ],
   "author": {
@@ -25,10 +27,10 @@
     "url": "https://github.com/angular/angular.js/issues"
   },
   "homepage": "http://angularjs.org",
-  "gitHead": "6bdc6b4855b416bf029105324080ca7d6aca0e9f",
-  "_id": "angular@1.4.7",
-  "_shasum": "f8990e71c9cd180a842b07e09e0801fe84e83878",
-  "_from": "angular@*",
+  "gitHead": "74c65a6a54f39516be40b0afdd99efb461595fd9",
+  "_id": "angular-mocks@1.4.7",
+  "_shasum": "d7343ee0a033f9216770bda573950f6814d95227",
+  "_from": "angular-mocks@*",
   "_npmVersion": "2.0.2",
   "_nodeVersion": "0.10.26",
   "_npmUser": {
@@ -37,8 +39,8 @@
   },
   "maintainers": [
     {
-      "name": "bclinkinbeard",
-      "email": "ben.clinkinbeard@gmail.com"
+      "name": "zizzamia",
+      "email": "leonardo.zizzamia@gmail.com"
     },
     {
       "name": "angularcore",
@@ -50,10 +52,10 @@
     }
   ],
   "dist": {
-    "shasum": "f8990e71c9cd180a842b07e09e0801fe84e83878",
-    "tarball": "http://registry.npmjs.org/angular/-/angular-1.4.7.tgz"
+    "shasum": "d7343ee0a033f9216770bda573950f6814d95227",
+    "tarball": "http://registry.npmjs.org/angular-mocks/-/angular-mocks-1.4.7.tgz"
   },
   "directories": {},
-  "_resolved": "https://registry.npmjs.org/angular/-/angular-1.4.7.tgz",
+  "_resolved": "https://registry.npmjs.org/angular-mocks/-/angular-mocks-1.4.7.tgz",
   "readme": "ERROR: No README data found!"
 }

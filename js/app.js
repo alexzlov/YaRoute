@@ -1,4 +1,3 @@
-tmap = null;
 angular.module('yaRoute', [])
 
   /**
@@ -62,8 +61,8 @@ angular.module('yaRoute', [])
   /**
    * Контроллер приложения
    */
-  .controller('YRouteController', ['$scope', '$element', '$window', 'maps', 'config',
-    function($scope, $element, $window, maps, config) {
+  .controller('YRouteController', ['$scope', '$window', 'maps', 'config',
+    function YRouteController($scope, $window, maps, config) {
       "use strict";
       var self = this;
       self.routePoints = [];
@@ -71,10 +70,11 @@ angular.module('yaRoute', [])
 
       // Инициализация
       maps.ready(function(ymaps) {
-        self.ymap = tmap = new ymaps.Map("map", {
+        self.ymap = new ymaps.Map("map", {
           center: config.mapCenter,
           zoom: 10
         });
+        self.ymap.controls.add(new ymaps.control.ZoomControl());
         self.ymaps = ymaps;
         var collection = new ymaps.GeoObjectCollection({}, {
           draggable: true
@@ -97,7 +97,7 @@ angular.module('yaRoute', [])
           name: self.routePointName
         };
         var newMapPoint = new self.ymaps.Placemark(
-          config.mapCenter,
+          self.ymap.getCenter(),
           {
             balloonContent: newPoint.name
           },
