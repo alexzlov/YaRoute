@@ -9,25 +9,27 @@
   <script src="https://api-maps.yandex.ru/2.0-stable/?load=package.standard,package.geoObjects,package.geoQuery&lang=ru-RU" type="text/javascript"></script>
 </head>
 <body>
-  <h1>YaRoutes</h1>
   <div ng-app="yaRoute" ng-controller="YRouteController as yrc">
     <section>
-      <div class="routes">
-        <input type="text"
-               size="40"
-               placeholder="Введите название точки маршрута"
-               ng-model="yrc.routePointName"
-               ng-keyup="$event.keyCode == 13 ? yrc.addRoutePoint() : null"/>
-        <ul>
-          <li class="list-item"
-              ng-repeat="item in yrc.routePoints track by $index"
-              data-id="{{ item.id }}"
-              draggable droppable drop="yrc.drop(from, to)">{{ item.name }}
-            <button class="delete-btn" ng-click="yrc.deleteRoutePoint(item.id)">x</button>
-          </li>
-        </ul>
+      <div class="container">
+        <h1>YaRoutes</h1>
+        <div class="routes">
+          <input type="text"
+                 size="40"
+                 placeholder="Введите название точки маршрута"
+                 ng-model="yrc.routePointName"
+                 ng-keyup="$event.keyCode == 13 ? yrc.addRoutePoint() : null"/>
+          <ul>
+            <li class="list-item"
+                ng-repeat="item in yrc.routePoints track by $index"
+                data-id="{{ item.id }}"
+                draggable droppable drop="yrc.drop(from, to)">{{ item.name }}
+              <button class="delete-btn" ng-click="yrc.deleteRoutePoint(item.id)">x</button>
+            </li>
+          </ul>
+        </div>
+        <div class="ymap" id="map"></div>
       </div>
-      <div class="ymap" id="map"></div>
     </section>
   </div>
 </body>
