@@ -1,10 +1,14 @@
+section {
+  position: fixed;
+}
+
 .routes {
   float: left;
 }
 .ymap {
   width: 400px;
   height: 400px;
-  margin-left: 20%;
+  margin-left: 65%;
 }
 
 .delete-btn {
